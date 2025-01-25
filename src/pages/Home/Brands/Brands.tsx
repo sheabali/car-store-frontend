@@ -1,5 +1,5 @@
 import Container from '@/components/Container/Container';
-import { MoveUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Brands = () => {
@@ -12,7 +12,7 @@ const Brands = () => {
           </h1>
           <Link to="/" className="flex justify-center items-center gap-1">
             <p>Show All Brands</p>
-            <MoveUpRight className="opacity-50 mb-2" />
+            <ArrowUpRight className="opacity-50 " />
           </Link>
         </div>
         <img src="/src/images/Container.png" alt="" />

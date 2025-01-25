@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import { BellRing, Check, MoveUpRight } from 'lucide-react';
+import { ArrowUpRight, BellRing, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 const notifications = [
   {
@@ -43,7 +43,7 @@ const Vehicles = ({ className, ...props }: CardProps) => {
           </h1>
           <Link to="/" className="flex justify-center items-center gap-1">
             <p>Show All Vehicles</p>
-            <MoveUpRight className="opacity-50 mb-2" />
+            <ArrowUpRight className="opacity-50 " />
           </Link>
         </div>
         <div className="px-12">
