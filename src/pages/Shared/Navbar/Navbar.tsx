@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './Navbar.css';
-import { Button } from 'antd';
 
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -42,7 +41,7 @@ const Navbar = () => {
         {/* Right Section: User Actions */}
         <div className="navbar-right">
           <div className="signin">
-            <Button>Login</Button>
+            <button>Login</button>
           </div>
         </div>
 
