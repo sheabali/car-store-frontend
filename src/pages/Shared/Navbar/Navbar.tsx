@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './Navbar.css';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
@@ -40,9 +42,9 @@ const Navbar = () => {
 
         {/* Right Section: User Actions */}
         <div className="navbar-right">
-          <div className="signin">
-            <button>Login</button>
-          </div>
+          <Button asChild>
+            <Link to="/login">Login</Link>
+          </Button>
         </div>
 
         {/* Hamburger Icon */}
