@@ -1,9 +1,5 @@
 const Banner = () => {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+  return <div className="bg-image"></div>;
 };
 
 export default Banner;

@@ -1,0 +1,9 @@
+.bg-image {
+  background-image: url('../../images/slider51.png.png');
+  background-size: cover; /* Ensures the image covers the whole screen */
+  background-position: center center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  height: 100vh; /* Makes the div take the full height of the viewport */
+  color: white; /* Optional: for better text visibility */
+  padding: 20px; /* Optional: to add some spacing around the content */
+}
