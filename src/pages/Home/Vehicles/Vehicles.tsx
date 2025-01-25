@@ -10,8 +10,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  // CarouselNext,
+  // CarouselPrevious,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight, BellRing, Check } from 'lucide-react';
@@ -46,7 +46,7 @@ const Vehicles = ({ className, ...props }: CardProps) => {
             <ArrowUpRight className="opacity-50 " />
           </Link>
         </div>
-        <div className="px-12">
+        <div className="">
           {/* Larger Carousel */}
           <Carousel
             opts={{
@@ -58,7 +58,7 @@ const Vehicles = ({ className, ...props }: CardProps) => {
               {Array.from({ length: 6 }).map((_, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="">
-                    <Card className={cn('lg:w-[370px] ', className)} {...props}>
+                    <Card className={cn('lg:w-[410px] ', className)} {...props}>
                       <CardHeader>
                         <img
                           src="/src/images/The All-New 2021 Rolls-Royce Ghost Will Spoil You For Choice _ Carscoops.jpeg"
@@ -107,8 +107,6 @@ const Vehicles = ({ className, ...props }: CardProps) => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
           </Carousel>
         </div>
       </div>
