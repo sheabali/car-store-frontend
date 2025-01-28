@@ -22,7 +22,7 @@ const Sell = () => {
               exceptional service.
             </p>
             <Button
-              className="py-3 px-6 text-sm md:text-base"
+              className="py-6 px-6 text-sm md:text-base"
               variant="secondary"
             >
               Get Started <MoveUpRight />
@@ -46,7 +46,7 @@ const Sell = () => {
               exceptional service.
             </p>
             <Button
-              className="py-3 px-6 text-sm md:text-base"
+              className="py-6 px-6 text-sm md:text-base"
               variant="secondary"
             >
               Get Started <MoveUpRight />
