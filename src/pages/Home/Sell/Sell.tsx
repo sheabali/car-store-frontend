@@ -30,7 +30,6 @@ const Sell = () => {
           </div>
         </div>
 
-        {/* Right Section */}
         <div className="bg-[url('/src/images/2.png')] bg-cover bg-center w-full md:w-1/2 h-72 md:h-auto p-8 md:p-16 rounded-xl">
           <div>
             <div className="my-4">
