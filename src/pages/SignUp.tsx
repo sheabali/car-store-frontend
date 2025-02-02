@@ -1,14 +1,12 @@
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
 const SignUp = () => {
   return (
     <div className="flex h-screen bg-black">
       {/* Left Section */}
       <div className="w-1/2 bg-white flex flex-col justify-center p-16">
         <div className="flex flex-col items-start">
-          <img
-            src="/logo.svg" // Replace with your logo
-            alt="Car Store Logo"
-            className="mb-8 h-12"
-          />
           <h1 className="text-3xl font-semibold mb-2">Sign Up</h1>
           <p className="text-gray-600 mb-8">
             Welcome to Car Store – Let’s create your account
@@ -21,10 +19,10 @@ const SignUp = () => {
               >
                 Full Name
               </label>
-              <input
+              <Input
                 type="text"
                 id="name"
-                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="Your Full Name"
               />
             </div>
@@ -35,10 +33,10 @@ const SignUp = () => {
               >
                 Email
               </label>
-              <input
+              <Input
                 type="email"
                 id="email"
-                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="youremail@carstore.com"
               />
             </div>
@@ -49,37 +47,24 @@ const SignUp = () => {
               >
                 Password
               </label>
-              <input
+              <Input
                 type="password"
                 id="password"
-                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="••••••••"
               />
             </div>
-            <div className="mb-4">
-              <label
-                htmlFor="confirm-password"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Confirm Password
-              </label>
-              <input
-                type="password"
-                id="confirm-password"
-                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="••••••••"
-              />
-            </div>
-            <button
+
+            <Button
               type="submit"
-              className="w-full py-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600"
+              className="w-full py-6 bg-black text-white font-semibold rounded-lg hover:bg-gray-800"
             >
               Create Account
-            </button>
+            </Button>
           </form>
           <p className="mt-4 text-sm text-gray-600">
             Already have an account?{' '}
-            <a href="#" className="text-green-500 hover:underline">
+            <a href="#" className="text-gray-500 hover:underline">
               Log in
             </a>
           </p>
@@ -101,9 +86,9 @@ const SignUp = () => {
             <p className="font-semibold">Free Maintenance for 1 Year</p>
             <p className="text-xs">With any car purchased this month</p>
           </div>
-          <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
+          <Button className="mt-4 px-4 py-6 bg-white text-black rounded-lg hover:bg-white">
             Explore Offers
-          </button>
+          </Button>
         </div>
       </div>
     </div>
