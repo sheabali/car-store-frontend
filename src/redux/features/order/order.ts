@@ -10,7 +10,7 @@ const orderApi = baseApi.injectEndpoints({
       }),
     }),
     getOrders: builder.query({
-      query: () => '/order',
+      query: () => '/orders',
     }),
     verifyOrder: builder.query({
       query: (order_id) => ({

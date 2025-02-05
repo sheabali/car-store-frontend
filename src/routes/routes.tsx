@@ -8,6 +8,7 @@ import SignUp from '@/pages/SignUp';
 import ProductDetails from '@/pages/Products/ProductDetails';
 import CheckoutPage from '@/pages/CheckoutPage/CheckoutPage';
 import OrderVerification from '@/pages/VerifyOrder/VerifyOrder';
+import OrderDetails from '@/pages/Order/Order';
 
 const routes = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const routes = createBrowserRouter([
       {
         path: '/orders/verify',
         element: <OrderVerification />,
+      },
+      {
+        path: '/orders',
+        element: <OrderDetails />,
       },
       {
         path: '/login',
