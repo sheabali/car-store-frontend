@@ -1,7 +1,43 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useCreateUserMutation } from '@/redux/features/auth/authApi';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [createUser, { isLoading, isSuccess, error, data, isError }] =
+    useCreateUserMutation();
+
+  const onSubmit = async (data: any) => {
+    await createUser(data).unwrap();
+  };
+
+  const id = '121';
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading('Processing...', { id: id });
+    }
+    if (isSuccess) {
+      toast.success(data.message, { id: id });
+      if (data?.data) {
+        setTimeout(() => {
+          window.location.href = data.data;
+        }, 1000);
+      }
+    }
+    if (isError) {
+      toast.error(error?.data?.errorSources[0]?.message, { id: id });
+    }
+  }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
+
   return (
     <div className="flex h-screen bg-black">
       {/* Left Section */}
@@ -11,7 +47,7 @@ const SignUp = () => {
           <p className="text-gray-600 mb-8">
             Welcome to Car Store – Let’s create your account
           </p>
-          <form className="w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full">
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -22,9 +58,13 @@ const SignUp = () => {
               <Input
                 type="text"
                 id="name"
+                {...register('name', { required: 'Full Name is required' })}
                 className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="Your Full Name"
               />
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name.message}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -36,9 +76,19 @@ const SignUp = () => {
               <Input
                 type="email"
                 id="email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: 'Invalid email address',
+                  },
+                })}
                 className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="youremail@carstore.com"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm">{errors.email.message}</p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -50,23 +100,37 @@ const SignUp = () => {
               <Input
                 type="password"
                 id="password"
+                {...register('password', { required: 'Password is required' })}
                 className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="••••••••"
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-
             <Button
               type="submit"
+              disabled={isLoading}
               className="w-full py-6 bg-black text-white font-semibold rounded-lg hover:bg-gray-800"
             >
-              Create Account
+              {isLoading ? 'Creating...' : 'Create Account'}
             </Button>
           </form>
+          {isSuccess && (
+            <p className="mt-4 text-green-500">Account created successfully!</p>
+          )}
+          {error && (
+            <p className="mt-4 text-red-500">
+              Failed to create account. Please try again.
+            </p>
+          )}
           <p className="mt-4 text-sm text-gray-600">
             Already have an account?{' '}
-            <a href="#" className="text-gray-500 hover:underline">
+            <Link to="/login" className="text-gray-500 hover:underline">
               Log in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
