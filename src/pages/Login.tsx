@@ -3,7 +3,8 @@ import { Input } from '@/components/ui/input';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { setUser, TUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
-import { FieldValues } from 'react-hook-form';
+import { verifyToken } from '@/utils/verifyToken';
+import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -11,10 +12,16 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const defaultValues = {
-    userId: '2026010016',
-    password: 'student123',
-  };
+  // const defaultValues = {
+  //   userId: '2026010016',
+  //   password: 'student123',
+  // };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({});
 
   const [login] = useLoginMutation();
 
@@ -24,7 +31,7 @@ export default function LoginPage() {
 
     try {
       const userInfo = {
-        id: data.userId,
+        email: data.email,
         password: data.password,
       };
       const res = await login(userInfo).unwrap();
@@ -33,15 +40,16 @@ export default function LoginPage() {
       dispatch(setUser({ user: user, token: res.data.accessToken }));
       toast.success('Logged in', { id: toastId, duration: 2000 });
 
-      if (res.data.needsPasswordChange) {
-        navigate(`/change-password`);
-      } else {
-        navigate(`/${user.role}/dashboard`);
-      }
+      // if (res.data.needsPasswordChange) {
+      //   navigate(`/change-password`);
+      // } else {
+      //   navigate(`/${user.role}/dashboard`);
+      // }
     } catch (err) {
       toast.error('Something went wrong', { id: toastId, duration: 2000 });
     }
   };
+
   return (
     <div className="flex h-screen bg-black">
       {/* Left Section */}
@@ -51,20 +59,26 @@ export default function LoginPage() {
           <p className="text-gray-600 mb-8">
             Welcome to BOXCARS – Let’s create your account
           </p>
-          <form className="w-full">
+          <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label
-                htmlFor="email"
+                htmlFor="Email"
                 className="block text-sm font-medium text-gray-700"
               >
                 Email
               </label>
               <Input
-                type="email"
+                type="text"
                 id="email"
+                {...register('email', { required: 'User ID is required' })}
                 className="w-full mt-1 px-4 py-5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="youremail@carstore.com"
+                placeholder="Enter your User ID"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -76,9 +90,15 @@ export default function LoginPage() {
               <Input
                 type="password"
                 id="password"
+                {...register('password', { required: 'Password is required' })}
                 className="w-full mt-1 px-4 py-5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="••••••••"
               />
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
               <div className="text-right mt-1">
                 <a href="#" className="text-sm text-black hover:underline">
                   Forgot?
@@ -89,15 +109,15 @@ export default function LoginPage() {
               type="submit"
               className="w-full py-6 bg-black text-white font-semibold rounded-lg hover:bg-gray-700"
             >
-              Sign up
+              Log In
             </Button>
           </form>
-          {/* <p className="mt-4 text-sm text-gray-600">
-            Already have an account?{' '}
+          <p className="mt-4 text-sm text-gray-600">
+            Don’t have an account?{' '}
             <a href="#" className="text-green-500 hover:underline">
-              Log in
+              Sign up
             </a>
-          </p> */}
+          </p>
         </div>
       </div>
 
@@ -118,7 +138,7 @@ export default function LoginPage() {
           </div>
           <Button
             variant="secondary"
-            className="mt-4 px-4 py-6   text-black rounded-lg hover:bg-white"
+            className="mt-4 px-4 py-6 text-black rounded-lg hover:bg-white"
           >
             View All Cars
           </Button>
