@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetSingleCarQuery } from '@/redux/features/cars/car.api';
 
 export default function CarDetails() {
@@ -68,29 +68,30 @@ export default function CarDetails() {
             Price: ৳{car?.data.price}
           </p>
 
-          <Button
-            onClick={handleCheckCar}
-            className="w-full bg-black text-white py-3 rounded-xl"
-          >
-            Buy Now
-          </Button>
+          <Link to={`/checkout/${car?.data._id}`}>
+            <Button
+              onClick={handleCheckCar}
+              className="w-full bg-black text-white py-3 rounded-xl"
+            >
+              Buy Now
+            </Button>
+          </Link>
         </div>
       </div>
 
       {/* Image Gallery */}
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-4">Image Gallery</h2>
+        <h2 className="text-2xl font-bold mb-4">Description</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {/* {car.gallery.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt={`Gallery ${index + 1}`}
-              className="w-full rounded-xl"
-            />
-          ))} */}
+          {car?.data.description}
         </div>
       </div>
+      {/* <div className="mb-6">
+        <h2 className="text-2xl font-bold mb-4">Iy</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {car?.data.description}
+        </div>
+      </div> */}
     </div>
   );
 }
