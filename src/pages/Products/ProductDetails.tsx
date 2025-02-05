@@ -10,10 +10,10 @@ export default function CarDetails() {
 
   // const { brand } = ;
 
-  console.log('carData', car?.data);
+  // console.log('carData', car?.data);
 
   const handleCheckCar = () => {
-    // window.location.href = `/checkout?car=${car.id}`;
+    console.log(car?.data);
   };
   //
   return (
@@ -72,7 +72,7 @@ export default function CarDetails() {
             onClick={handleCheckCar}
             className="w-full bg-black text-white py-3 rounded-xl"
           >
-            Proceed to Checkout
+            Buy Now
           </Button>
         </div>
       </div>

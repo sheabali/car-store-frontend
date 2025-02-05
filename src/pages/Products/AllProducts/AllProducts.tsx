@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 export default function AllProductsPage() {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   console.log('params', params);
-  const { data: carsData, isFetching } = useGetAllCarQuery(params);
+  const { data: carsData, isFetching, isLoading } = useGetAllCarQuery(params);
 
   const [search, setSearch] = useState('');
   const [filterCategory, setFilterCategory] = useState(null);
