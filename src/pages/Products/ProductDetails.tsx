@@ -1,40 +1,94 @@
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useParams } from 'react-router-dom';
+import { useGetSingleCarQuery } from '@/redux/features/cars/car.api';
 
-export default function ProductDetails() {
-  const [product] = useState({
-    id: 1,
-    name: 'Awesome Gadget',
-    price: '$199.99',
-    description: 'A high-tech gadget that improves your daily life.',
-    image:
-      'https://demo1.leotheme.com/leo_rent_car_demo/32-large_default/brown-bear-printed-sweater.jpg',
-  });
+export default function CarDetails() {
+  const carId = useParams();
+  console.log(carId.Id);
 
-  const handleBuyNow = () => {
-    window.location.href = `/checkout?product=${product.id}`;
+  const { data: car } = useGetSingleCarQuery(carId?.Id);
+
+  // const { brand } = ;
+
+  console.log('carData', car?.data);
+
+  const handleCheckCar = () => {
+    // window.location.href = `/checkout?car=${car.id}`;
   };
-
+  //
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-2xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="max-w-6xl mx-auto my-20 p-6 bg-white shadow-lg rounded-2xl">
+      {/* Title and Price */}
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-4xl font-bold">
+          {car?.data.brand} {car?.data.model}
+        </h1>
+        <p className="text-2xl font-semibold text-black">৳ {car?.data.price}</p>
+      </div>
+
+      {/* Main Image */}
+      <div className="mb-6">
         <img
-          src={product.image}
-          alt={product.name}
+          src="https://unsplash.com/photos/a-car-parked-in-the-dark-with-its-lights-on-m2-1PmKnig0"
+          alt={`${car?.data.brand} ${car?.data.model}`}
           className="w-full rounded-xl"
         />
+      </div>
+
+      {/* Car Information */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div>
-          <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-          <p className="text-gray-600 mb-4">{product.description}</p>
-          <p className="text-2xl font-semibold text-blue-600 mb-6">
-            {product.price}
+          <h2 className="text-2xl font-bold mb-4">Car Information</h2>
+          <ul className="text-gray-600 space-y-2">
+            <li>
+              <strong>Brand:</strong> {car?.data.brand}
+            </li>
+            <li>
+              <strong>Model:</strong> {car?.data.model}
+            </li>
+            <li>
+              <strong>Year:</strong> {car?.data.year}
+            </li>
+            <li>
+              <strong>Category:</strong> {car?.data.category}
+            </li>
+            <li>
+              <strong>In Stock:</strong> {car?.data.inStock ? 'Yes' : 'No'}
+            </li>
+          </ul>
+        </div>
+
+        {/* Booking Form */}
+        <div className="p-4 bg-gray-100 rounded-xl shadow-md">
+          <h2 className="text-2xl font-bold mb-4">Buy Now</h2>
+          <p className="text-gray-700 mb-4">
+            Available Quantity: {car?.data.quantity}
           </p>
+          <p className="text-lg font-semibold text-gray-700 mb-4">
+            Price: ৳{car?.data.price}
+          </p>
+
           <Button
-            onClick={handleBuyNow}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-xl"
+            onClick={handleCheckCar}
+            className="w-full bg-black text-white py-3 rounded-xl"
           >
-            Buy Now
+            Proceed to Checkout
           </Button>
+        </div>
+      </div>
+
+      {/* Image Gallery */}
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold mb-4">Image Gallery</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* {car.gallery.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Gallery ${index + 1}`}
+              className="w-full rounded-xl"
+            />
+          ))} */}
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox';
 import { useGetAllCarQuery } from '@/redux/features/cars/car.api';
 import { TQueryParams } from '@/types/global';
+import { Link } from 'react-router-dom';
 
 export default function AllProductsPage() {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
@@ -143,9 +144,11 @@ export default function AllProductsPage() {
                       Seats: {product.seats}
                     </span>
                   </div>
-                  <Button className="mt-2" disabled={!product.inStock}>
-                    View Details
-                  </Button>
+                  <Link to={`/productDetails/${product._id}`}>
+                    <Button className="mt-2" disabled={!product.inStock}>
+                      View Details
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
