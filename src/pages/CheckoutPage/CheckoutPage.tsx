@@ -13,6 +13,7 @@ const CheckoutPage = () => {
   console.log(carId.Id);
 
   const { data: car } = useGetSingleCarQuery(carId?.Id);
+  console.log(car);
 
   // const cartData = useAppSelector((state) => console.log(state));
   // console.log(cartData);
@@ -22,9 +23,23 @@ const CheckoutPage = () => {
   const [createOrder, { isLoading, isSuccess, isError, data, error }] =
     useCreateOrderMutation();
 
+  // Convert data into the required format
+  const formattedData = {
+    products: [
+      {
+        product: car?.data._id,
+        quantity: 1, // Set quantity as per requirement
+        // price: data.price,
+      },
+    ],
+  };
+
+  // Output result
+  console.log(formattedData);
+
   const handlePlaceOrder = async () => {
-    console.log(car?.data);
-    await createOrder({ products: car?.data });
+    console.log(car);
+    await createOrder(formattedData);
   };
 
   const id = 'order';
