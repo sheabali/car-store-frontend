@@ -14,6 +14,7 @@ import { TQueryParams } from '@/types/global';
 
 export default function AllProductsPage() {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
+  console.log('params', params);
   const { data: carsData, isFetching } = useGetAllCarQuery(params);
 
   const [search, setSearch] = useState('');
