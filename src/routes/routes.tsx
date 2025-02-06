@@ -9,6 +9,7 @@ import ProductDetails from '@/pages/Products/ProductDetails';
 import CheckoutPage from '@/pages/CheckoutPage/CheckoutPage';
 import OrderVerification from '@/pages/VerifyOrder/VerifyOrder';
 import OrderDetails from '@/pages/Order/Order';
+import Dashboard from '@/components/Layout/Dashboard';
 
 const routes = createBrowserRouter([
   {
@@ -46,6 +47,16 @@ const routes = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard children={undefined} />,
+    children: [
+      {
+        path: 'alluser', // Use relative path here
+        element: <AllProductsPage />,
       },
     ],
   },
