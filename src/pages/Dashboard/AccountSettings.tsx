@@ -1,11 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-
 import { useChangePasswordMutation } from '@/redux/features/user/user.api';
-import { useAppDispatch } from '@/redux/hooks';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '@/redux/features/auth/authSlice';
 import { TResponse } from '@/types/global';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
@@ -53,7 +49,7 @@ const AccountSettings = () => {
       }
     }
     if (isError) {
-      toast.error(error.data.errorSources[0].message, { id: id });
+      toast.error(error?.data.errorSources[0].message, { id: id });
     }
   }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
