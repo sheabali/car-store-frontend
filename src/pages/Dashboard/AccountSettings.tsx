@@ -1,13 +1,21 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useState } from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+import { useChangePasswordMutation } from '@/redux/features/user/user.api';
+import { useAppDispatch } from '@/redux/hooks';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '@/redux/features/auth/authSlice';
+import { TResponse } from '@/types/global';
+import { toast } from 'sonner';
+import { useEffect } from 'react';
 
 const AccountSettings = () => {
-  const [success, setSuccess] = useState<string | null>(null);
-  const [serverError, setServerError] = useState<string | null>(null);
+  const [changePassword, { data, isSuccess, isLoading, isError, error }] =
+    useChangePasswordMutation();
+
+  // const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
 
   // React Hook Form setup
   const {
@@ -18,14 +26,36 @@ const AccountSettings = () => {
   } = useForm({});
 
   // Handle password update
-  const onSubmit = async (data: {
-    oldPassword: string;
-    newPassword: string;
-  }) => {
-    setServerError(null);
-    setSuccess(null);
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const res = (await changePassword(data)) as TResponse<any>;
+    console.log(res?.data?.success);
+
+    if (res?.data?.success) {
+      toast.success('Password Change Successfully.');
+    }
+    reset();
   };
+  const id = 'order';
+
+  useEffect(() => {
+    if (isLoading) {
+      toast.loading('Processing...', { id: id });
+    }
+    if (isSuccess) {
+      toast.success(data.message, { id: id });
+      if (data?.data) {
+        setTimeout(() => {
+          window.location.href = data.data;
+        }, 1000);
+      }
+    }
+    if (isError) {
+      toast.error(error.data.errorSources[0].message, { id: id });
+    }
+  }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
   return (
     <div className="lg:w-[1085px] mx-auto p-4 sm:p-6 md:p-8 space-y-8">
@@ -108,7 +138,7 @@ const AccountSettings = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <Input
-                type="password"
+                type="text"
                 placeholder="Current password"
                 className="w-full px-4 py-2 border rounded-md"
                 {...register('oldPassword')}
@@ -122,7 +152,7 @@ const AccountSettings = () => {
 
             <div>
               <Input
-                type="password"
+                type="text"
                 placeholder="New password"
                 className="w-full px-4 py-2 border rounded-md"
                 {...register('newPassword')}
@@ -138,11 +168,6 @@ const AccountSettings = () => {
               {isSubmitting ? 'Updating...' : 'Change password'}
             </Button>
           </div>
-
-          {serverError && (
-            <p className="text-red-500 text-sm mt-2">{serverError}</p>
-          )}
-          {success && <p className="text-green-500 text-sm mt-2">{success}</p>}
         </form>
       </div>
     </div>
