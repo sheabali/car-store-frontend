@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom';
-
 import App from '../App';
 import Home from '../pages/Home/Home';
 import AllProductsPage from '@/pages/Products/AllProducts/AllProducts';
@@ -10,6 +9,8 @@ import CheckoutPage from '@/pages/CheckoutPage/CheckoutPage';
 import OrderVerification from '@/pages/VerifyOrder/VerifyOrder';
 import OrderDetails from '@/pages/Order/Order';
 import Dashboard from '@/components/Layout/Dashboard';
+import Orders from '@/pages/Dashboard/User/Orders';
+import AccountSettings from '@/pages/Dashboard/AccountSettings';
 
 const routes = createBrowserRouter([
   {
@@ -55,8 +56,12 @@ const routes = createBrowserRouter([
     element: <Dashboard children={undefined} />,
     children: [
       {
-        path: 'alluser', // Use relative path here
-        element: <AllProductsPage />,
+        path: 'order', // Use relative path here
+        element: <Orders />,
+      },
+      {
+        path: 'accountsettings', // Use relative path here
+        element: <AccountSettings />,
       },
     ],
   },

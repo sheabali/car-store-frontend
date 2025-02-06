@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { Home, Settings } from 'lucide-react';
 
 import {
   Sidebar,
@@ -15,28 +15,13 @@ import { Link } from 'react-router-dom';
 // Menu items.
 const items = [
   {
-    title: 'Home',
-    url: '/dashboard/alluser',
+    title: 'Order',
+    url: '/dashboard/order',
     icon: Home,
   },
   {
-    title: 'Inbox',
-    url: '#',
-    icon: Inbox,
-  },
-  {
-    title: 'Calendar',
-    url: '#',
-    icon: Calendar,
-  },
-  {
-    title: 'Search',
-    url: '#',
-    icon: Search,
-  },
-  {
-    title: 'Settings',
-    url: '#',
+    title: 'Account Settings',
+    url: '/dashboard/accountsettings',
     icon: Settings,
   },
 ];
