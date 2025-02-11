@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { useLoginMutation } from '@/redux/features/auth/authApi';
 import { setUser, TUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
-import { verifyToken } from '@/utils/verifyToken';
+import verifyToken from '@/utils/verifyToken';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';

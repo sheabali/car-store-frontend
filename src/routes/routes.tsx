@@ -11,6 +11,7 @@ import OrderDetails from '@/pages/Order/Order';
 import Dashboard from '@/components/Layout/Dashboard';
 import Orders from '@/pages/Dashboard/User/Orders';
 import AccountSettings from '@/pages/Dashboard/AccountSettings';
+import ProtectedRoute from '@/components/Layout/ProtectedRoute';
 
 const routes = createBrowserRouter([
   {
@@ -52,8 +53,30 @@ const routes = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
-    element: <Dashboard children={undefined} />,
+    path: '/user',
+    element: (
+      <ProtectedRoute role="user">
+        <Dashboard children={undefined} />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: 'order', // Use relative path here
+        element: <Orders />,
+      },
+      {
+        path: 'accountsettings', // Use relative path here
+        element: <AccountSettings />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: (
+      <ProtectedRoute role="admin">
+        <Dashboard children={undefined} />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: 'order', // Use relative path here
