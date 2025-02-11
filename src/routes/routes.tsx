@@ -9,9 +9,10 @@ import CheckoutPage from '@/pages/CheckoutPage/CheckoutPage';
 import OrderVerification from '@/pages/VerifyOrder/VerifyOrder';
 import OrderDetails from '@/pages/Order/Order';
 import Dashboard from '@/components/Layout/Dashboard';
-import Orders from '@/pages/Dashboard/User/Orders';
-import AccountSettings from '@/pages/Dashboard/AccountSettings';
 import ProtectedRoute from '@/components/Layout/ProtectedRoute';
+import { routesGenerator } from '@/utils/routesGenerator';
+import userPaths from './user.routes';
+import adminPaths from './admin.routes';
 
 const routes = createBrowserRouter([
   {
@@ -59,16 +60,7 @@ const routes = createBrowserRouter([
         <Dashboard children={undefined} />
       </ProtectedRoute>
     ),
-    children: [
-      {
-        path: 'order', // Use relative path here
-        element: <Orders />,
-      },
-      {
-        path: 'accountsettings', // Use relative path here
-        element: <AccountSettings />,
-      },
-    ],
+    children: routesGenerator(userPaths),
   },
   {
     path: '/admin',
@@ -77,16 +69,7 @@ const routes = createBrowserRouter([
         <Dashboard children={undefined} />
       </ProtectedRoute>
     ),
-    children: [
-      {
-        path: 'order', // Use relative path here
-        element: <Orders />,
-      },
-      {
-        path: 'accountsettings', // Use relative path here
-        element: <AccountSettings />,
-      },
-    ],
+    children: routesGenerator(adminPaths),
   },
 ]);
 
