@@ -3,10 +3,11 @@ import { Input } from '@/components/ui/input';
 import { useCreateUserMutation } from '@/redux/features/auth/authApi';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -17,6 +18,7 @@ const SignUp = () => {
 
   const onSubmit = async (data: any) => {
     await createUser(data).unwrap();
+    navigate(`/`);
   };
 
   const id = '121';
@@ -27,11 +29,6 @@ const SignUp = () => {
     }
     if (isSuccess) {
       toast.success(data.message, { id: id });
-      if (data?.data) {
-        setTimeout(() => {
-          window.location.href = data.data;
-        }, 1000);
-      }
     }
     if (isError) {
       toast.error(error?.data?.errorSources[0]?.message, { id: id });
