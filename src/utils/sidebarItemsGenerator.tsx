@@ -1,12 +1,21 @@
-import { Home, Settings, LucideIcon, User } from 'lucide-react';
+import {
+  Home,
+  Settings,
+  LucideIcon,
+  User,
+  CirclePlus,
+  ArrowDownToDot,
+} from 'lucide-react';
 import { TSidebarItem, TUserPaths } from '../types';
 
 const iconsMap: Record<string, LucideIcon> = {
   Home,
   Settings,
   User,
+  CirclePlus,
+  ArrowDownToDot,
 };
-
+// console.log('iconsMap[item.icon]', iconsMap[item?.icon]);
 export const sidebarItemsGenerator = (
   items: TUserPaths[],
   role: string

@@ -1,4 +1,4 @@
-import AccountSettings from '@/pages/Dashboard/AccountSettings';
+import AddCar from '@/pages/Dashboard/Admin/AddCar';
 import UserManagement from '@/pages/Dashboard/Admin/userManagement';
 
 const adminPaths = [
@@ -9,10 +9,10 @@ const adminPaths = [
     icon: 'User',
   },
   {
-    name: 'Settings',
-    path: 'accountsettings',
-    element: <AccountSettings />,
-    icon: 'Settings',
+    name: 'Add Car',
+    path: 'addcar',
+    element: <AddCar />,
+    icon: 'CirclePlus',
   },
 ];
 
