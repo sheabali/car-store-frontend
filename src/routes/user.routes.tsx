@@ -4,9 +4,9 @@ import Orders from '@/pages/Dashboard/User/Orders';
 const userPaths = [
   {
     name: 'Order',
-    path: 'order', // ✅ Ensure path is present
+    path: 'order',
     element: <Orders />,
-    icon: 'Home', // ✅ Add icon name as a string
+    icon: 'Home',
   },
   {
     name: 'Settings',

@@ -1,9 +1,10 @@
-import { Home, Settings, LucideIcon } from 'lucide-react';
+import { Home, Settings, LucideIcon, User } from 'lucide-react';
 import { TSidebarItem, TUserPaths } from '../types';
 
 const iconsMap: Record<string, LucideIcon> = {
   Home,
   Settings,
+  User,
 };
 
 export const sidebarItemsGenerator = (
