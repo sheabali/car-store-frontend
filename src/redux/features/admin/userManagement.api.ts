@@ -21,6 +21,13 @@ const userManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['users'],
     }),
+    addCar: builder.mutation({
+      query: (userId) => ({
+        url: `/users/${userId}`,
+        method: 'PATCH',
+      }),
+      invalidatesTags: ['users'],
+    }),
   }),
 });
 
