@@ -12,7 +12,14 @@ const productManagementApi = baseApi.injectEndpoints({
       }),
       // invalidatesTags: ['cars'],
     }),
+    getAllCars: builder.query({
+      query: () => ({
+        url: `/cars`,
+        method: 'POST',
+      }),
+      // invalidatesTags: ['cars'],
+    }),
   }),
 });
 
-export const { useAddCarMutation } = productManagementApi;
+export const { useAddCarMutation, getAllCars } = productManagementApi;

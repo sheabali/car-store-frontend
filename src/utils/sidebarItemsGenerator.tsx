@@ -5,6 +5,7 @@ import {
   User,
   CirclePlus,
   ArrowDownToDot,
+  Car,
 } from 'lucide-react';
 import { TSidebarItem, TUserPaths } from '../types';
 
@@ -14,6 +15,7 @@ const iconsMap: Record<string, LucideIcon> = {
   User,
   CirclePlus,
   ArrowDownToDot,
+  Car,
 };
 // console.log('iconsMap[item.icon]', iconsMap[item?.icon]);
 export const sidebarItemsGenerator = (
