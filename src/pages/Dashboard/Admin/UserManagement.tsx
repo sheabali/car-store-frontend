@@ -19,11 +19,11 @@ const UserManagement = () => {
   console.log(userData);
 
   const handleBlockUser = async (userId: string) => {
-    console.log('Blocking user with ID:', userId); // Debugging
+    console.log('Blocking user with ID:', userId);
     try {
       await blockUser(userId).unwrap();
       console.log('User blocked successfully!');
-      refetch(); // ✅ ক্যাশ ফোর্স রিফ্রেশ
+      refetch();
     } catch (error) {
       console.error('Failed to block user', error);
     }
