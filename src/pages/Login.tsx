@@ -45,7 +45,7 @@ export default function LoginPage() {
       } else {
         navigate(`/${user.role}`);
       }
-    } catch (err) {
+    } catch {
       toast.error('Something went wrong', { id: toastId, duration: 2000 });
     }
   };
@@ -76,7 +76,7 @@ export default function LoginPage() {
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.email.message}
+                  {errors.email?.message?.toString()}
                 </p>
               )}
             </div>
@@ -96,7 +96,7 @@ export default function LoginPage() {
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.password.message}
+                  {errors.password?.message?.toString()}
                 </p>
               )}
               <div className="text-right mt-1">

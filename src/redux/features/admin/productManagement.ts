@@ -1,3 +1,4 @@
+import { TCar } from '@/components/constant/constant';
 import { baseApi } from '@/redux/api/baseApi';
 import { TResponseRedux } from '@/types';
 // import { TResponseRedux } from '@/types';
@@ -18,11 +19,19 @@ const productManagementApi = baseApi.injectEndpoints({
         url: '/cars',
         method: 'GET',
       }),
-      transformResponse: (response: TResponseRedux<any>) => {
+      transformResponse: (response: TResponseRedux<TCar[]>) => {
         return { data: response.data, meta: response.meta };
       },
 
       providesTags: ['cars'],
+    }),
+    updateCar: builder.mutation({
+      query: (args) => ({
+        url: `/cars/${args.id}`,
+        method: 'PATCH',
+        body: args.data,
+      }),
+      invalidatesTags: ['cars'],
     }),
     deleteCar: builder.mutation({
       query: (carId) => ({
@@ -34,5 +43,9 @@ const productManagementApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useAddCarMutation, useGetAllCarsQuery, useDeleteCarMutation } =
-  productManagementApi;
+export const {
+  useAddCarMutation,
+  useGetAllCarsQuery,
+  useUpdateCarMutation,
+  useDeleteCarMutation,
+} = productManagementApi;
