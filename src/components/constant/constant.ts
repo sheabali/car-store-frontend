@@ -1,5 +1,5 @@
 export type TCar = {
-  _id: string;
+  _id?: string;
   brand: string;
   model: string;
   year: number;
