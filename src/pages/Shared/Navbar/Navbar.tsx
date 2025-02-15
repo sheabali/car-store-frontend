@@ -24,12 +24,18 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="container">
-        {/* Left Section: Brand and Contact */}
-        <div className="navbar-left">
-          <Link to="/" className="brand">
+        <Link to="/" className="flex items-center -my-4 p-2 md:p-4">
+          <div className="text-xl sm:text-sm font-bold md:text-2xl">
             BOXCARS
-          </Link>
-        </div>
+          </div>
+          <div>
+            <img
+              src="/src/images/auto_car-16-removebg-preview.png"
+              alt="car logo"
+              className="w-16 md:w-24 object-contain"
+            />
+          </div>
+        </Link>
 
         {/* Center Section: Navigation Links */}
         <ul className={`menu ${menuActive ? 'active' : ''}`}>

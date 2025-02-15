@@ -1,6 +1,7 @@
 import Container from '@/components/Container/Container';
 import { Button } from '@/components/ui/button';
 import { MoveUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Sell = () => {
   return (
@@ -21,12 +22,14 @@ const Sell = () => {
               We are committed to providing our customers <br /> with
               exceptional service.
             </p>
-            <Button
-              className="py-6 px-6 text-sm md:text-base"
-              variant="secondary"
-            >
-              Get Started <MoveUpRight />
-            </Button>
+            <Link to="/allproduct">
+              <Button
+                className="py-6 px-6 text-sm md:text-base"
+                variant="secondary"
+              >
+                Get Started <MoveUpRight />
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -44,12 +47,14 @@ const Sell = () => {
               We are committed to providing our customers <br /> with
               exceptional service.
             </p>
-            <Button
-              className="py-6 px-6 text-sm md:text-base"
-              variant="secondary"
-            >
-              Get Started <MoveUpRight />
-            </Button>
+            <Link to="/allproduct">
+              <Button
+                className="py-6 px-6 text-sm md:text-base"
+                variant="secondary"
+              >
+                Get Started <MoveUpRight />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

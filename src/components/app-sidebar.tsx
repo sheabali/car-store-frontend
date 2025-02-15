@@ -15,6 +15,7 @@ import verifyTokens from '../utils/verifyToken';
 import { sidebarItemsGenerator } from '@/utils/sidebarItemsGenerator';
 import adminPaths from '@/routes/admin.routes';
 import userPaths from '@/routes/user.routes';
+import { Home } from 'lucide-react';
 
 const userRole = {
   ADMIN: 'admin',
@@ -52,6 +53,11 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <Link to="/">
+            <SidebarMenuButton>
+              <Home /> Home
+            </SidebarMenuButton>
+          </Link>
           <SidebarGroupContent>
             <SidebarMenu>
               {sidebarItems.length ? (

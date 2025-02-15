@@ -10,7 +10,10 @@ const Brands = () => {
           <h1 className="text-2xl font-bold my-10">
             Explore Our Premium Brands
           </h1>
-          <Link to="/" className="flex justify-center items-center gap-1">
+          <Link
+            to="/allproduct"
+            className="flex justify-center items-center gap-1"
+          >
             <p>Show All Brands</p>
             <ArrowUpRight className="opacity-50 " />
           </Link>

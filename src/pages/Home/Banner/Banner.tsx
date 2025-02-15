@@ -1,6 +1,7 @@
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Banner = () => {
   const { register, handleSubmit } = useForm();
@@ -55,12 +56,14 @@ const Banner = () => {
           <option value="x5">X5</option>
         </select>
 
-        <Button
-          type="submit"
-          className="w-full   md:w-auto p-6 rounded-lg  text-white  bg-black"
-        >
-          <Search />
-        </Button>
+        <Link to="/allproduct">
+          <Button
+            type="submit"
+            className="w-full   md:w-auto p-6 rounded-lg  text-white  bg-black"
+          >
+            <Search />
+          </Button>
+        </Link>
       </form>
 
       {/* Image */}

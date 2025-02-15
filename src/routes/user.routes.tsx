@@ -1,7 +1,14 @@
 import AccountSettings from '@/pages/Dashboard/AccountSettings';
 import Orders from '@/pages/Dashboard/User/Orders';
+import Overview from '@/pages/Dashboard/User/Overview';
 
 const userPaths = [
+  {
+    name: 'Overview',
+    path: 'overview',
+    element: <Overview />,
+    icon: 'Outdent',
+  },
   {
     name: 'Order',
     path: 'order',
