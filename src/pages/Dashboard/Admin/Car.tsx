@@ -26,15 +26,6 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { TCar } from '@/components/constant/constant';
 
-// Define the Car type interface
-// interface Car {
-//   _id: string;
-//   brand: string;
-//   category: string;
-//   quantity: number;
-//   price: number;
-// }
-
 const CarComponent = () => {
   // Fetch all cars data
   const { data: carData } = useGetAllCarsQuery(undefined);
@@ -90,6 +81,7 @@ const CarComponent = () => {
 
   return (
     <div className="w-[1120px] px-4 mt-5">
+      <div className="text-2xl font-bold py-4">Manage Car</div>
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
@@ -111,15 +103,21 @@ const CarComponent = () => {
                 <TableCell className="text-right">{car.price}</TableCell>
 
                 <TableCell className="text-right flex justify-end gap-2">
-                  {/* Edit Button */}
-                  <button onClick={() => handleEditClick(car)}>
+                  <Button
+                    className=" size-8"
+                    variant="outline"
+                    onClick={() => handleEditClick(car)}
+                  >
                     <SquarePen />
-                  </button>
+                  </Button>
 
-                  {/* Delete Button */}
-                  <button onClick={() => handleDeleteClick(car._id)}>
+                  <Button
+                    className=" size-8"
+                    variant="outline"
+                    onClick={() => car._id && handleDeleteClick(car._id)}
+                  >
                     <Trash2 />
-                  </button>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

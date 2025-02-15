@@ -1,3 +1,4 @@
+import { TResponseRedux } from '@/types';
 import { baseApi } from '../../api/baseApi';
 
 const orderApi = baseApi.injectEndpoints({
@@ -10,7 +11,24 @@ const orderApi = baseApi.injectEndpoints({
       }),
     }),
     getOrders: builder.query({
-      query: () => '/orders',
+      query: () => ({
+        url: '/orders',
+        method: 'GET',
+      }),
+      transformResponse: (response: TResponseRedux<any[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+      providesTags: ['orders'],
+    }),
+    deleteOrders: builder.mutation({
+      query: (id) => ({
+        url: `/orders/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['orders'],
     }),
     verifyOrder: builder.query({
       query: (order_id) => ({
@@ -25,5 +43,6 @@ const orderApi = baseApi.injectEndpoints({
 export const {
   useCreateOrderMutation,
   useGetOrdersQuery,
+  useDeleteOrdersMutation,
   useVerifyOrderQuery,
 } = orderApi;

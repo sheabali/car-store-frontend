@@ -5,7 +5,7 @@ import { useCreateOrderMutation } from '@/redux/features/order/order';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { data, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const CheckoutPage = () => {
