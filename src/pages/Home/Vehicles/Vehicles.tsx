@@ -29,7 +29,7 @@ const Vehicles = ({ className, ...props }: CardProps) => {
         <div className="flex justify-between items-center my-10">
           <h1 className="text-2xl font-bold">Explore Our Premium Vehicles</h1>
           <Link
-            to="/all-vehicles"
+            to="/allproduct"
             className="flex justify-center items-center gap-1"
           >
             <p>Show All Cars</p>
