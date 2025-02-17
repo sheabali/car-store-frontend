@@ -52,3 +52,6 @@ export const sell = 'https://i.ibb.co.com/fGPJz3Cw/4.png';
 export const ProductImg =
   'https://i.ibb.co.com/1YVWKKm4/samuele-errico-piccarini-FMb-WFDi-VRPs-unsplash.jpg';
 export const ProductImg2 = 'https://i.ibb.co.com/fGPJz3Cw/4.png';
+
+export const profileImage =
+  'https://i.ibb.co.com/3mN5km2h/dan-gold-N7-Ri-Dzf-F2iw-unsplash.jpg';

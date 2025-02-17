@@ -6,6 +6,7 @@ import { TResponse } from '@/types/global';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { profileImage } from '@/components/constant/constant';
 
 const AccountSettings = () => {
   const [changePassword, { data, isSuccess, isLoading, isError, error }] =
@@ -74,7 +75,7 @@ const AccountSettings = () => {
       <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
         <div className="w-24 h-24 rounded-full overflow-hidden">
           <img
-            src="/src/images/dan-gold-N7RiDzfF2iw-unsplash.jpg"
+            src={profileImage}
             alt="Profile"
             className="object-cover w-full h-full"
           />

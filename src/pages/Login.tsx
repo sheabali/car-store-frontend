@@ -5,7 +5,7 @@ import { setUser, TUser } from '@/redux/features/auth/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import verifyToken from '@/utils/verifyToken';
 import { FieldValues, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 export default function LoginPage() {
@@ -114,9 +114,9 @@ export default function LoginPage() {
           </form>
           <p className="mt-4 text-sm text-gray-600">
             Don’t have an account?{' '}
-            <a href="#" className="text-green-500 hover:underline">
+            <Link to="/signup" className="text-black hover:underline">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>
