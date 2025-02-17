@@ -1,3 +1,4 @@
+import { ProductImg2 } from '@/components/constant/constant';
 import Container from '@/components/Container/Container';
 import { Button } from '@/components/ui/button';
 import { MoveUpRight } from 'lucide-react';
@@ -32,7 +33,7 @@ const Finding = () => {
         <div className="w-full md:w-1/2 flex justify-center md:justify-end">
           <img
             className="w-3/4 md:w-2/3"
-            src="/src/images/4.png"
+            src={ProductImg2}
             alt="Car Illustration"
           />
         </div>

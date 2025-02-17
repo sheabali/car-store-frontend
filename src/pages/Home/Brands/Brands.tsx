@@ -1,3 +1,4 @@
+import { ContainerImage } from '@/components/constant/constant';
 import Container from '@/components/Container/Container';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -18,7 +19,7 @@ const Brands = () => {
             <ArrowUpRight className="opacity-50 " />
           </Link>
         </div>
-        <img src="/src/images/Container.png" alt="" />
+        <img src={ContainerImage} alt="" />
       </div>
     </Container>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BaseQueryApi,
   BaseQueryFn,
@@ -12,7 +13,7 @@ import { toast } from 'sonner';
 import { logout, setUser } from '../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api',
+  baseUrl: 'https://car-store-backend-taupe.vercel.app/api',
 
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
@@ -34,17 +35,21 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status === 404) {
-    toast.error(result?.error?.data?.message);
+    const errorData = result.error.data as { message?: string } | undefined;
+    toast.error(errorData?.message || 'Not found');
   }
 
   if (result?.error?.status === 401) {
     //* Send Refresh
     console.log('Sending refresh token');
 
-    const res = await fetch('http://localhost:5000/api/auth/refresh-token', {
-      method: 'POST',
-      credentials: 'include',
-    });
+    const res = await fetch(
+      'https://car-store-backend-taupe.vercel.app/api/auth/refresh-token',
+      {
+        method: 'POST',
+        credentials: 'include',
+      }
+    );
 
     const data = await res.json();
 

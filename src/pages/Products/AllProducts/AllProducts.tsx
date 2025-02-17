@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -12,15 +12,16 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useGetAllCarQuery } from '@/redux/features/cars/car.api';
 import { TQueryParams } from '@/types/global';
 import { Link } from 'react-router-dom';
+import { SearchImage } from '@/components/constant/constant';
 
 export default function AllProductsPage() {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   console.log('params', params);
-  const { data: carsData, isFetching, isLoading } = useGetAllCarQuery(params);
+  const { data: carsData } = useGetAllCarQuery(params);
 
   const [search, setSearch] = useState('');
-  const [filterCategory, setFilterCategory] = useState(null);
-  const [filterBrand, setFilterBrand] = useState([]);
+  const [filterCategory, setFilterCategory] = useState<string | null>(null);
+  const [filterBrand, setFilterBrand] = useState<string[]>([]);
   const [filterPrice, setFilterPrice] = useState(0);
 
   useEffect(() => {
@@ -123,6 +124,13 @@ export default function AllProductsPage() {
                   </div>
                 )}
                 <CardContent className="space-y-2">
+                  <CardHeader>
+                    <img
+                      src={SearchImage}
+                      alt={SearchImage}
+                      className="w-full h-48 object-cover rounded-md"
+                    />
+                  </CardHeader>
                   <h2 className="text-xl font-bold">
                     {product.brand} {product.model}
                   </h2>

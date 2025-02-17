@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useCreateUserMutation } from '@/redux/features/auth/authApi';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -16,7 +17,7 @@ const SignUp = () => {
   const [createUser, { isLoading, isSuccess, error, data, isError }] =
     useCreateUserMutation();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     await createUser(data).unwrap();
     navigate(`/`);
   };
@@ -31,7 +32,9 @@ const SignUp = () => {
       toast.success(data.message, { id: id });
     }
     if (isError) {
-      toast.error(error?.data?.errorSources[0]?.message, { id: id });
+      const errorMessage =
+        (error as any)?.data?.errorSources?.[0]?.message || 'An error occurred';
+      toast.error(errorMessage, { id: id });
     }
   }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
@@ -59,7 +62,7 @@ const SignUp = () => {
                 className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="Your Full Name"
               />
-              {errors.name && (
+              {errors.name && typeof errors.name.message === 'string' && (
                 <p className="text-red-500 text-sm">{errors.name.message}</p>
               )}
             </div>
@@ -83,7 +86,7 @@ const SignUp = () => {
                 className="w-full mt-1 px-4 py-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                 placeholder="youremail@carstore.com"
               />
-              {errors.email && (
+              {errors.email && typeof errors.email.message === 'string' && (
                 <p className="text-red-500 text-sm">{errors.email.message}</p>
               )}
             </div>
@@ -103,7 +106,8 @@ const SignUp = () => {
               />
               {errors.password && (
                 <p className="text-red-500 text-sm">
-                  {errors.password.message}
+                  {typeof errors.password.message === 'string' &&
+                    errors.password.message}
                 </p>
               )}
             </div>

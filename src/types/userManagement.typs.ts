@@ -1,5 +1,7 @@
 export type GTUser = {
   _id: string;
+  id?: string;
+  status?: string;
   name: string;
   email: string;
   password: string;

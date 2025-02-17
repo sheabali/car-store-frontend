@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { logout } from '@/redux/features/auth/authSlice';
+import { logo } from '@/components/constant/constant';
 
 const Navbar = () => {
   // State to toggle the menu
@@ -25,12 +26,10 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="container">
         <Link to="/" className="flex items-center -my-4 p-2 md:p-4">
-          <div className="text-xl sm:text-sm font-bold md:text-2xl">
-            BOXCARS
-          </div>
+          <div className="text-xl sm:text-sm font-bold md:text-2xl">ARS</div>
           <div>
             <img
-              src="/src/images/auto_car-16-removebg-preview.png"
+              src={logo}
               alt="car logo"
               className="w-16 md:w-24 object-contain"
             />
@@ -46,7 +45,7 @@ const Navbar = () => {
             <Link to="/allproduct">Cars</Link>
           </li>
           <li>
-            <a href="#">About Us</a>
+            <Link to="/about">About Us</Link>
           </li>
           {user ? (
             <li>

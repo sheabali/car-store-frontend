@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useGetSingleCarQuery } from '@/redux/features/cars/car.api';
 import { useCreateOrderMutation } from '@/redux/features/order/order';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -15,10 +15,15 @@ const CheckoutPage = () => {
   const { data: car } = useGetSingleCarQuery(carId?.Id);
   console.log(car);
 
+  const carPrice = car?.data?.price || 0;
+  const quantity = car?.data.quantity; // Assuming 1 quantity for now
+  const subtotal = carPrice * quantity;
+  const tax = subtotal * 0.1; // 10% tax
+  const shipping = 5.5; // Flat shipping rate
+  const total = subtotal + tax + shipping;
+
   // const cartData = useAppSelector((state) => console.log(state));
   // console.log(cartData);
-
-  const dispatch = useAppDispatch();
 
   const [createOrder, { isLoading, isSuccess, isError, data, error }] =
     useCreateOrderMutation();
@@ -67,7 +72,7 @@ const CheckoutPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
     alert('Address saved successfully!');
   };
@@ -100,7 +105,8 @@ const CheckoutPage = () => {
               />
               {errors.firstName && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.firstName.message}
+                  {errors.firstName?.message &&
+                    String(errors.firstName.message)}
                 </p>
               )}
             </div>
@@ -119,7 +125,7 @@ const CheckoutPage = () => {
               />
               {errors.lastName && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.lastName.message}
+                  {errors.lastName?.message && String(errors.lastName.message)}
                 </p>
               )}
             </div>
@@ -141,7 +147,8 @@ const CheckoutPage = () => {
             />
             {errors.streetAddress && (
               <p className="text-red-500 text-sm mt-1">
-                {errors.streetAddress.message}
+                {errors.streetAddress?.message &&
+                  String(errors.streetAddress.message)}
               </p>
             )}
           </div>
@@ -172,7 +179,7 @@ const CheckoutPage = () => {
               />
               {errors.state && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.state.message}
+                  {errors.state?.message && String(errors.state.message)}
                 </p>
               )}
             </div>
@@ -188,46 +195,49 @@ const CheckoutPage = () => {
               />
               {errors.zip && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.zip.message}
+                  {errors.zip?.message && String(errors.zip.message)}
                 </p>
               )}
             </div>
           </div>
 
-          <div className="mt-8">
-            <div className="text-xl font-semibold mb-4">Order Summary</div>
-            <div className="bg-gray-50 p-4 rounded-lg shadow">
-              <div className="text-sm mb-2">
-                <div className="flex justify-between">
-                  <span>Items (3)</span>
-                  <span>$56.73</span>
+          <div className="p-8 bg-gray-100 min-h-screen">
+            <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+              <div className="text-xl font-semibold mb-6">Shipping Address</div>
+
+              {/* Order Summary Section */}
+              <div className="mt-8">
+                <div className="text-xl font-semibold mb-4">Order Summary</div>
+                <div className="bg-gray-50 p-4 rounded-lg shadow">
+                  <div className="text-sm mb-2">
+                    <div className="flex justify-between">
+                      <span>Items ({quantity})</span>
+                      <span>${subtotal.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Shipping</span>
+                      <span>৳{shipping.toFixed(2)}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Tax (10%)</span>
+                      <span>৳{tax.toFixed(2)}</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-gray-300 pt-2 flex justify-between font-semibold">
+                    <span>Order Total:</span>
+                    <span>৳{total.toFixed(2)}</span>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span>Shipping and handling:</span>
-                  <span>$5.50</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Before tax:</span>
-                  <span>$62.23</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Tax collected:</span>
-                  <span>$8.21</span>
-                </div>
-              </div>
-              <div className="border-t border-gray-300 pt-2 flex justify-between font-semibold">
-                <span>Order Total:</span>
-                <span>$70.44</span>
+
+                <Button
+                  onClick={handlePlaceOrder}
+                  type="button"
+                  className="mt-4 w-full font-semibold py-3 bg-black text-white rounded-lg"
+                >
+                  Place Order
+                </Button>
               </div>
             </div>
-
-            <Button
-              onClick={handlePlaceOrder}
-              type="submit"
-              className="mt-4 w-full font-semibold py-6 bg-black text-white rounded-lg shadow"
-            >
-              Place Order
-            </Button>
           </div>
         </form>
       </div>

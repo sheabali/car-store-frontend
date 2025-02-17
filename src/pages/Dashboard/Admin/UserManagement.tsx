@@ -15,7 +15,7 @@ import {
 
 const UserManagement = () => {
   const { data: userData, isFetching, refetch } = useGetAllUserQuery(undefined);
-  const [blockUser, { isSuccess, isLoading }] = useBlockUserMutation();
+  const [blockUser, { isLoading }] = useBlockUserMutation();
   console.log(userData);
 
   const handleBlockUser = async (userId: string) => {
@@ -47,7 +47,7 @@ const UserManagement = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {userData && userData?.data.length > 0 ? (
+            {userData && userData.data && userData.data.length > 0 ? (
               userData?.data.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell className="font-medium">{user.name}</TableCell>

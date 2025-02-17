@@ -13,6 +13,7 @@ import ProtectedRoute from '@/components/Layout/ProtectedRoute';
 import { routesGenerator } from '@/utils/routesGenerator';
 import userPaths from './user.routes';
 import adminPaths from './admin.routes';
+import About from '@/pages/About/About';
 
 const routes = createBrowserRouter([
   {
@@ -28,12 +29,20 @@ const routes = createBrowserRouter([
         element: <AllProductsPage />,
       },
       {
+        path: '/about',
+        element: <About />,
+      },
+      {
         path: '/productDetails/:Id',
         element: <ProductDetails />,
       },
       {
         path: '/checkout/:Id',
-        element: <CheckoutPage />,
+        element: (
+          <ProtectedRoute role="user">
+            <CheckoutPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: '/orders/verify',

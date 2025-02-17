@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Link, useParams } from 'react-router-dom';
 import { useGetSingleCarQuery } from '@/redux/features/cars/car.api';
+import { ProductImg } from '@/components/constant/constant';
 
 export default function CarDetails() {
   const carId = useParams();
@@ -29,7 +30,7 @@ export default function CarDetails() {
       {/* Main Image */}
       <div className="mb-6">
         <img
-          src="https://unsplash.com/photos/a-car-parked-in-the-dark-with-its-lights-on-m2-1PmKnig0"
+          src={ProductImg}
           alt={`${car?.data.brand} ${car?.data.model}`}
           className="w-full rounded-xl"
         />

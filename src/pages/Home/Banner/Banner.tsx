@@ -2,6 +2,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { bannerImage } from '@/components/constant/constant';
 
 const Banner = () => {
   const { register, handleSubmit } = useForm();
@@ -69,7 +70,7 @@ const Banner = () => {
       {/* Image */}
       <div className="w-full md:w-[50%] px-4 md:px-0 mt-6">
         <img
-          src="/src/images/slider51.png.png"
+          src={bannerImage}
           alt="Car Image"
           className="w-full object-cover rounded-lg"
         />

@@ -5,6 +5,7 @@ import { useChangePasswordMutation } from '@/redux/features/user/user.api';
 import { TResponse } from '@/types/global';
 import { toast } from 'sonner';
 import { useEffect } from 'react';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 const AccountSettings = () => {
   const [changePassword, { data, isSuccess, isLoading, isError, error }] =
@@ -49,7 +50,13 @@ const AccountSettings = () => {
       }
     }
     if (isError) {
-      toast.error(error?.data.errorSources[0].message, { id: id });
+      const apiError = error as FetchBaseQueryError & {
+        data?: { errorSources?: { message?: string }[] };
+      };
+
+      const errorMessage =
+        apiError.data?.errorSources?.[0]?.message || 'An error occurred';
+      toast.error(errorMessage, { id });
     }
   }, [data?.data, data?.message, error, isError, isLoading, isSuccess]);
 
@@ -67,7 +74,7 @@ const AccountSettings = () => {
       <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
         <div className="w-24 h-24 rounded-full overflow-hidden">
           <img
-            src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+            src="/src/images/dan-gold-N7RiDzfF2iw-unsplash.jpg"
             alt="Profile"
             className="object-cover w-full h-full"
           />
